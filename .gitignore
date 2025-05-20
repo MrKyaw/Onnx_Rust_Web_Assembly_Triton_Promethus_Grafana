@@ -1,0 +1,72 @@
+
+# Rust artifacts
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# WASM artifacts
+/pkg/
+/out/
+*.wasm
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Node/JS
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker
+docker-compose.override.yml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Build files
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Large data files
+*.bin
+*.data
+*.model
+*.onnx
+*.h5
+*.pth
+*.pt
+
+# Models
+models/*.onnx
+!models/small-model.onnx  # Keep this one
+
+# Keep these in version control
+!.gitignore
+!.dockerignore
+!docker-compose.yml

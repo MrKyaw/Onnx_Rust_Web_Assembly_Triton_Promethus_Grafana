@@ -1,0 +1,8 @@
+
+fastapi==0.95.0
+uvicorn==0.21.1
+numpy==1.24.2
+onnxruntime==1.13.1
+prometheus-fastapi-instrumentator==5.9.1
+tritonclient==2.29.0
+python-multipart==0.0.6
