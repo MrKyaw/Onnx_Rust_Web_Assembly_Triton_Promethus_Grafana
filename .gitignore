@@ -2,7 +2,6 @@
 # Rust artifacts
 /target/
 **/*.rs.bk
-Cargo.lock
 
 # WASM artifacts
 /pkg/
@@ -70,3 +69,9 @@ models/*.onnx
 !.gitignore
 !.dockerignore
 !docker-compose.yml
+# Python tooling
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.venv/

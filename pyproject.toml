@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "triton-gateway-core"
+version = "1.0.0"
+description = "Dependency-free ONNX/Triton gateway core: config parsing, validation, batching, backends, Prometheus metrics and readiness."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Kyaw Kyaw Oo", email = "kyaw.tech@gmail.com" }]
+keywords = ["onnx", "triton", "rust", "webassembly", "prometheus", "grafana", "fastapi", "mlops"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-cov>=5"]
+live = ["fastapi>=0.95", "uvicorn>=0.21"]
+
+[project.scripts]
+triton-gateway = "triton_gateway.__main__:main"
+
+[tool.setuptools]
+packages = ["triton_gateway"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q --strict-markers"
+
+[tool.coverage.run]
+source = ["triton_gateway"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 100

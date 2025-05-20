@@ -1,47 +1,42 @@
-
 services:
   app:
     build: .
     ports:
       - "8000:8000"
-    volumes:
-      - ./app:/app           # Mount your Python code
-      - ./pkg:/app/pkg       # Mount WASM artifacts
-    working_dir: /app        # Set working directory
-    command: uvicorn main:app --host 0.0.0.0 --port 8000
     environment:
-      - TRITON_URL=triton:8001
+      TRITON_ENABLED: "true"
+      TRITON_URL: "http://triton:8000"
+      TRITON_MODEL: "onnx_wasm_model"
+      TRITON_TIMEOUT: "5"
+      MAX_BATCH_SIZE: "8"
+      ALLOW_ORIGINS: "*"
     depends_on:
       - triton
 
   triton:
     image: nvcr.io/nvidia/tritonserver:22.12-py3
+    command: ["tritonserver", "--model-repository=/models"]
     ports:
-      - "8001:8001"
+      - "8001:8000"
+      - "8002:8002"
     volumes:
       - ./model_repository:/models
-    command: ["tritonserver", "--model-repository=/models"]
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
 
   prometheus:
-    image: prom/prometheus
+    image: prom/prometheus:v2.51.0
     ports:
       - "9090:9090"
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
     depends_on:
       - app
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:10.4.0
     ports:
       - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: "admin"
     volumes:
       - grafana-storage:/var/lib/grafana
     depends_on:
