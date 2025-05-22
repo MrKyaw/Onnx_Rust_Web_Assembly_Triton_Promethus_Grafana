@@ -207,7 +207,7 @@ More: [ARCHITECTURE.md](./ARCHITECTURE.md) · [docs/DESIGN_DECISIONS.md](./docs/
 
 ---
 
-## Recruiter snapshot
+## Reviewer snapshot
 
 - **Role fit:** ML platform / inference infrastructure / MLOps / systems engineer.
 - **Signals:** cross-language delivery (Rust → WASM, Python → HTTP), protocol-level work (Triton v2), observability, validation, batching, CI, documentation.
